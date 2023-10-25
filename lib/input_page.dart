@@ -1,3 +1,6 @@
+import 'package:bmi_caculator/card.dart';
+import 'package:bmi_caculator/card_content_gender.dart';
+import 'package:bmi_caculator/card_content_height.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -65,7 +68,7 @@ class _InputPageState extends State<InputPage> {
                           updateColor(1);
                         });
                       },
-                      child: Card(
+                      child: MyCard(
                         color: maleCardColor,
                         cardChild: const CardContentGender(
                             iconGender: FontAwesomeIcons.mars,
@@ -82,7 +85,7 @@ class _InputPageState extends State<InputPage> {
                           updateColor(2);
                         });
                       },
-                      child: Card(
+                      child: MyCard(
                         color: femaleCardColor,
                         cardChild: const CardContentGender(
                             iconGender: FontAwesomeIcons.venus,
@@ -96,7 +99,7 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             const Expanded(
-              child: Card(
+              child: MyCard(
                 color: Color(0xff1D1E33),
                 cardChild:
                     CardContentHeight(nameData: "HEIGHT", resultData: "180"),
@@ -106,7 +109,7 @@ class _InputPageState extends State<InputPage> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: Card(
+                    child: MyCard(
                       color: Color(0xff1D1E33),
                       cardChild: CardContentWeightAge(
                         nameData: "WEIGHT",
@@ -115,7 +118,7 @@ class _InputPageState extends State<InputPage> {
                     ),
                   ),
                   Expanded(
-                    child: Card(
+                    child: MyCard(
                       color: Color(0xff1D1E33),
                       cardChild: CardContentWeightAge(
                         nameData: "AGE",
@@ -210,94 +213,94 @@ class CardContentWeightAge extends StatelessWidget {
   }
 }
 
-class CardContentHeight extends StatelessWidget {
-  const CardContentHeight(
-      {super.key, required this.nameData, required this.resultData});
-  final String nameData;
-  final String resultData;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            child: Text(
-              nameData,
-              style: const TextStyle(
-                color: Color(0xff8D8E98),
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
-              ),
-            ),
-          ),
-          Container(
-            child: Text(
-              resultData,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 50,
-                  fontWeight: FontWeight.w600),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
+// class CardContentHeight extends StatelessWidget {
+//   const CardContentHeight(
+//       {super.key, required this.nameData, required this.resultData});
+//   final String nameData;
+//   final String resultData;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: double.infinity,
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: <Widget>[
+//           Container(
+//             child: Text(
+//               nameData,
+//               style: const TextStyle(
+//                 color: Color(0xff8D8E98),
+//                 fontWeight: FontWeight.w500,
+//                 fontSize: 20,
+//               ),
+//             ),
+//           ),
+//           Container(
+//             child: Text(
+//               resultData,
+//               style: const TextStyle(
+//                   color: Colors.white,
+//                   fontSize: 50,
+//                   fontWeight: FontWeight.w600),
+//             ),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-class CardContentGender extends StatelessWidget {
-  const CardContentGender(
-      {super.key,
-      required this.nameGender,
-      required this.iconGender,
-      required this.inactiveTextCardColor,
-      required this.inactiveIconColor});
-  final String nameGender;
-  final IconData iconGender;
-  final Color inactiveIconColor;
-  final Color inactiveTextCardColor;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          child: Icon(
-            iconGender,
-            size: 80,
-            color: inactiveIconColor,
-          ),
-        ),
-        Container(
-          child: Text(
-            nameGender,
-            style: TextStyle(
-                color: inactiveTextCardColor,
-                fontWeight: FontWeight.w500,
-                fontSize: 20),
-          ),
-        ),
-      ],
-    );
-  }
-}
+// class CardContentGender extends StatelessWidget {
+//   const CardContentGender(
+//       {super.key,
+//       required this.nameGender,
+//       required this.iconGender,
+//       required this.inactiveTextCardColor,
+//       required this.inactiveIconColor});
+//   final String nameGender;
+//   final IconData iconGender;
+//   final Color inactiveIconColor;
+//   final Color inactiveTextCardColor;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: <Widget>[
+//         Container(
+//           child: Icon(
+//             iconGender,
+//             size: 80,
+//             color: inactiveIconColor,
+//           ),
+//         ),
+//         Container(
+//           child: Text(
+//             nameGender,
+//             style: TextStyle(
+//                 color: inactiveTextCardColor,
+//                 fontWeight: FontWeight.w500,
+//                 fontSize: 20),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
-class Card extends StatelessWidget {
-  const Card({super.key, required this.color, required this.cardChild});
-  final Color color;
-  final Widget cardChild;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: cardChild,
-    );
-  }
-}
+// class Card extends StatelessWidget {
+//   const Card({super.key, required this.color, required this.cardChild});
+//   final Color color;
+//   final Widget cardChild;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: const EdgeInsets.all(15),
+//       decoration: BoxDecoration(
+//         color: color,
+//         borderRadius: BorderRadius.circular(10),
+//       ),
+//       child: cardChild,
+//     );
+//   }
+// }
 //key class , flutter outline , chú ý Widget text
