@@ -16,6 +16,26 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleCardColor = inactiveCardColor;
+  Color femaleCardColor = inactiveCardColor;
+  void updateColor(int gender) {
+    if (gender == 1) {
+      if (maleCardColor == inactiveCardColor) {
+        maleCardColor = activeCardColor;
+        femaleCardColor = inactiveCardColor;
+      } else {
+        maleCardColor = inactiveCardColor;
+      }
+    } else if (gender == 2) {
+      if (femaleCardColor == inactiveCardColor) {
+        femaleCardColor = activeCardColor;
+        maleCardColor = inactiveCardColor;
+      } else {
+        femaleCardColor = inactiveCardColor;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,22 +61,35 @@ class _InputPageState extends State<InputPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        print("hello world");
+                        setState(() {
+                          updateColor(1);
+                        });
                       },
-                      child: const Card(
-                        color: Color(0xff1D1E33),
-                        cardChild: CardContentGender(
+                      child: Card(
+                        color: maleCardColor,
+                        cardChild: const CardContentGender(
                             iconGender: FontAwesomeIcons.mars,
-                            nameGender: "MALE"),
+                            nameGender: "MALE",
+                            inactiveTextCardColor: inactiveTextCardColor,
+                            inactiveIconColor: inactiveIconColor),
                       ),
                     ),
                   ),
-                  const Expanded(
-                    child: Card(
-                      color: Color(0xff1D1E33),
-                      cardChild: CardContentGender(
-                          iconGender: FontAwesomeIcons.venus,
-                          nameGender: "FEMALE"),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          updateColor(2);
+                        });
+                      },
+                      child: Card(
+                        color: femaleCardColor,
+                        cardChild: const CardContentGender(
+                            iconGender: FontAwesomeIcons.venus,
+                            nameGender: "FEMALE",
+                            inactiveTextCardColor: inactiveTextCardColor,
+                            inactiveIconColor: inactiveIconColor),
+                      ),
                     ),
                   ),
                 ],
@@ -128,7 +161,7 @@ class CardContentWeightAge extends StatelessWidget {
           child: Text(
             nameData,
             style: const TextStyle(
-                color: Color(0xff8D8E98),
+                color: inactiveTextCardColor,
                 fontWeight: FontWeight.w500,
                 fontSize: 20),
           ),
@@ -216,9 +249,15 @@ class CardContentHeight extends StatelessWidget {
 
 class CardContentGender extends StatelessWidget {
   const CardContentGender(
-      {super.key, required this.nameGender, required this.iconGender});
+      {super.key,
+      required this.nameGender,
+      required this.iconGender,
+      required this.inactiveTextCardColor,
+      required this.inactiveIconColor});
   final String nameGender;
   final IconData iconGender;
+  final Color inactiveIconColor;
+  final Color inactiveTextCardColor;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -228,14 +267,14 @@ class CardContentGender extends StatelessWidget {
           child: Icon(
             iconGender,
             size: 80,
-            color: const Color(0xff8D8E98),
+            color: inactiveIconColor,
           ),
         ),
         Container(
           child: Text(
             nameGender,
-            style: const TextStyle(
-                color: Color(0xff8D8E98),
+            style: TextStyle(
+                color: inactiveTextCardColor,
                 fontWeight: FontWeight.w500,
                 fontSize: 20),
           ),
